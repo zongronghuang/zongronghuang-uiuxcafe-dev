@@ -1,14 +1,13 @@
 import "./App.css";
 // import CardA from "./components/Cards/CardA";
-// import CardB from "./components/CardB";
-import CardA from "./components/Cards/CardA";
+import CardB from "./components/Cards/CardB";
 
 function App() {
   return (
     <div className="App">
-      <CardA />
+      {/* <CardA /> */}
 
-      {/* <CardB /> */}
+      <CardB />
     </div>
   );
 }
