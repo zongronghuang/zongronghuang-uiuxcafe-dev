@@ -23,7 +23,7 @@ const CardBJSX = ({ className }) => (
       <section className="facilities">
         <div className="bedrooms">
           <Bed size={36} weight="thin" />
-          &nbsp; &nbsp;
+          &nbsp;&nbsp;
           <span className="count">3</span>
           &nbsp;
           <span>Bedrooms</span>
@@ -31,7 +31,7 @@ const CardBJSX = ({ className }) => (
 
         <div className="bathrooms">
           <Bathtub size={36} weight="thin" />
-          &nbsp; &nbsp;
+          &nbsp;&nbsp;
           <span className="count">2</span>
           &nbsp;
           <span>Bathrooms</span>
@@ -69,8 +69,19 @@ const CardB = styled(CardBJSX)`
 
   /* CARD HEADER */
   .card-header {
+    position: relative;
     height: 44.35%;
     overflow: hidden;
+  }
+
+  .card-header:after {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    content: "♡";
+    font-size: 1.5rem;
+    color: white;
   }
 
   .card-image {
@@ -79,12 +90,12 @@ const CardB = styled(CardBJSX)`
 
   /* BODY */
   .card-body {
-    /* height: 35.49%; */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    /* background-color: gold; */
+    color: #434a58;
+    color: dimgray;
   }
 
   .profile {
@@ -98,18 +109,21 @@ const CardB = styled(CardBJSX)`
 
     & .price {
       margin: 15px 0;
-      font-size: 2rem;
+      font-size: 2.2rem;
+      font-weight: 350;
+      color: black;
     }
 
     & .address {
       font-size: 1.2rem;
+      font-weight: 350;
     }
   }
 
   .facilities {
     flex-grow: 1;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     outline: 1px solid lightgray;
     font-weight: 300;
@@ -119,15 +133,14 @@ const CardB = styled(CardBJSX)`
     & .bathrooms {
       display: flex;
       align-items: center;
-      width: 50%;
       height: 100%;
-      padding: 20px;
-      font-size: 1.3rem;
-      /* background-color: red; */
+      padding: 20px 0 20px 20px;
+      font-size: 1.2rem;
     }
 
     & .count {
       font-weight: bold;
+      color: black;
     }
   }
 
@@ -139,7 +152,8 @@ const CardB = styled(CardBJSX)`
     outline: 1px solid lightgray;
     height: 20.16%;
     padding: 20px;
-    background-color: beige;
+    color: dimgray;
+    background-color: #f5f8f8;
   }
 
   .contact-title {
@@ -165,6 +179,7 @@ const CardB = styled(CardBJSX)`
     & .contact-name {
       font-size: 1.2rem;
       letter-spacing: 0.8px;
+      color: black;
     }
 
     & .contact-number {
