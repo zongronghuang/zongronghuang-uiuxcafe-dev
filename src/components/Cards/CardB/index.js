@@ -40,7 +40,7 @@ const CardBJSX = ({ className }) => (
     </main>
 
     <footer className="card-footer">
-      <h5 className="contact-title">REALTOR</h5>
+      <h6 className="contact-title">REALTOR</h6>
       <div className="contact-info">
         <img
           className="contact-image"
@@ -94,8 +94,8 @@ const CardB = styled(CardBJSX)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #434a58;
     color: dimgray;
+    background-color: white;
   }
 
   .profile {

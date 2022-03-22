@@ -40,6 +40,7 @@ const CardA = styled(CardAJSX)`
     padding: 23px;
     font-family: sans-serif;
     text-align: left;
+    background-color: white;
   }
 
   .card-title {
