@@ -16,6 +16,18 @@ const SlideView = styled(SlideViewJSX)`
   grid-template-columns: 3;
   width: 100vw;
   height: 100vh;
+
+  &.down-step-0 {
+    transform: translateY(0%);
+  }
+
+  &.down-step-1 {
+    transform: translateY(100%);
+  }
+
+  &.down-step-2 {
+    transform: translateY(200%);
+  }
 `;
 
 export default SlideView;

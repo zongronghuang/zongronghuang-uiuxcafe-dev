@@ -6,13 +6,10 @@ const SlideJSX = ({
   bgColor,
   xCoordinate,
   yCoordinate,
-  startSlide,
 }) => {
   return (
     <article
-      className={`${className} ${bgColor} col-${xCoordinate} row-${yCoordinate} ${
-        startSlide ? "focus" : ""
-      }`}
+      className={`${className} ${bgColor} col-${xCoordinate} row-${yCoordinate}`}
     >
       <h1 className="title">{children}</h1>
     </article>

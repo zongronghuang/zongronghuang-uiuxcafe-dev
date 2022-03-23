@@ -4,24 +4,22 @@ import CardA from "./components/Cards/CardA";
 import CardB from "./components/Cards/CardB";
 import Slide from "./components/Slides/general/Slide";
 import SlideView from "./views/SlideView";
+import { jumpToLandingSlide } from "./utils/jumptToLandingSlide";
 
 function App() {
-  const viewRef = useRef();
+  const gridRef = useRef();
+  // 投影片 grid 的欄數和列數
+  const gridSizeRef = useRef({ cols: 3, rows: 3 });
+  // 標記使用者會看到的第一張投影片的座標
+  const landingSlideRef = useRef({ x: 2, y: 3 });
 
   useEffect(() => {
-    const step = 100;
-    const stepUnit = "vw";
-    const currentLeft = viewRef.current.style.left;
-
-    viewRef.current.style.left = currentLeft - step + stepUnit;
+    jumpToLandingSlide({ gridRef, landingSlideRef, gridSizeRef });
   }, []);
 
   return (
     <div className="App">
-      {/* <CardA /> */}
-
-      {/* <CardB /> */}
-      <SlideView ref={viewRef}>
+      <SlideView ref={gridRef}>
         <Slide xCoordinate="2" yCoordinate="1" bgColor="bg-blue">
           Go down
         </Slide>
