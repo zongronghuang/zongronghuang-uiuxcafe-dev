@@ -1,18 +1,19 @@
 const jumpToLandingSlide = ({ gridRef, landingSlideRef, gridSizeRef }) => {
   const step = 100;
-  const xStepUnit = "vw";
-  const yStepUnit = "vh";
-  const { left: currentLeft, top: currentTop } = gridRef.current.style;
+  const vw = "vw";
+  const vh = "vh";
   const { x, y } = landingSlideRef.current;
   const { cols, rows } = gridSizeRef.current;
-  const validSlideCoordinates = x <= cols && y <= rows && x > 1 && y > 1;
+  const validSlideCoordinates = x <= cols && y <= rows && x >= 1 && y >= 1;
+
+  console.log({ x, y, rows, cols });
 
   if (!validSlideCoordinates) {
     throw new Error("The landing slide does not exist");
   }
 
-  const newLeft = Number(currentLeft) - step * (x - 1) + xStepUnit;
-  const newTop = Number(currentTop) - step * (y - 1) + yStepUnit;
+  const newLeft = step * -(x - 1) + vw;
+  const newTop = step * -(y - 1) + vh;
 
   gridRef.current.style.left = newLeft;
   gridRef.current.style.top = newTop;

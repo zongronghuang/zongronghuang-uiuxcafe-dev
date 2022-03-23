@@ -1,0 +1,3 @@
+const moveGridHorizontally = () => {};
+
+export { moveGridHorizontally };
