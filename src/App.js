@@ -92,10 +92,6 @@ const App = styled(AppJSX)`
       height: 20%;
     }
   }
-
-  .show {
-    visibility: visible;
-  }
 `;
 
 export default App;
