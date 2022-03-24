@@ -40,16 +40,32 @@ function AppJSX({ className }) {
     });
   }, [hScrollStop, vScrollStop]);
 
+  const wheelHandler = (e) => {
+    if (hScrollStop !== intersectionSlideRef.current.x) {
+      gridRef.current.style.position = "fixed";
+      return;
+    }
+    gridRef.current.style.position = "absolute";
+    moveGridVertically(vScrollStop, setVScrollStop, e);
+  };
+
+  const clickRightBtnHandler = (e) => {
+    if (vScrollStop !== intersectionSlideRef.current.y) {
+      return;
+    }
+    moveGridHorizontally(gridRef, hScrollStop, setHScrollStop, e).toRight();
+  };
+
+  const clickLeftBtnHandler = (e) => {
+    if (vScrollStop !== intersectionSlideRef.current.y) {
+      return;
+    }
+
+    moveGridHorizontally(gridRef, hScrollStop, setHScrollStop, e).toLeft();
+  };
+
   return (
-    <div
-      className={`${className} App`}
-      onWheel={(e) => {
-        if (hScrollStop !== intersectionSlideRef.current.x) {
-          return;
-        }
-        moveGridVertically(vScrollStop, setVScrollStop, e);
-      }}
-    >
+    <div className={`${className} App`} onWheel={wheelHandler}>
       <GridView ref={gridRef}>
         <Slide xCoordinate="2" yCoordinate="1" bgColor="bg-blue">
           Go down
@@ -69,36 +85,12 @@ function AppJSX({ className }) {
       </GridView>
 
       <aside ref={leftArrowRef} className="arrow left-arrow">
-        <button
-          onClick={(e) => {
-            if (vScrollStop !== intersectionSlideRef.current.y) {
-              return;
-            }
-            moveGridHorizontally(
-              gridRef,
-              hScrollStop,
-              setHScrollStop,
-              e
-            ).toLeft();
-          }}
-        >
+        <button onClick={clickLeftBtnHandler}>
           <ArrowLeft size={32} />
         </button>
       </aside>
       <aside ref={rightArrowRef} className="arrow right-arrow">
-        <button
-          onClick={(e) => {
-            if (vScrollStop !== intersectionSlideRef.current.y) {
-              return;
-            }
-            moveGridHorizontally(
-              gridRef,
-              hScrollStop,
-              setHScrollStop,
-              e
-            ).toRight();
-          }}
-        >
+        <button onClick={clickRightBtnHandler}>
           <ArrowRight size={32} />
         </button>
       </aside>
@@ -114,7 +106,6 @@ const App = styled(AppJSX)`
     align-items: center;
     width: 5vw;
     height: 100vh;
-    /* background-color: rgba(255, 255, 255, 0.3); */
     visibility: hidden;
 
     &.left-arrow {

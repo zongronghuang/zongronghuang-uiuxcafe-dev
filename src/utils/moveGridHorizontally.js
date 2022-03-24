@@ -3,9 +3,9 @@ import { scrollTo } from "scroll-js";
 const moveGridHorizontally = (gridRef, hScrollStop, setHScrollStop, e) => {
   // left
   // h - 1
-  const root = document.querySelector("html");
+  // const root = document.querySelector("html");
 
-  root.style.overflowX = "scroll";
+  // root.style.overflowX = "scroll";
 
   const shiftLeftOptions = {
     1: () => {
@@ -32,7 +32,8 @@ const moveGridHorizontally = (gridRef, hScrollStop, setHScrollStop, e) => {
         // }).then(function () {
         //   console.log("Left to CENTER SLIDE");
         // });
-        gridRef.current.style.left = "-100vw";
+        // gridRef.current.style.left = "-100vw";
+        gridRef.current.style.left = `-${(3 - 2) * 100}vw`;
 
         return prevHScrollStop - 1;
       });
@@ -48,7 +49,8 @@ const moveGridHorizontally = (gridRef, hScrollStop, setHScrollStop, e) => {
         //   }).then(function () {
         //     console.log("Right to CENTER SLIDE");
         //   });
-        gridRef.current.style.left = "-100vw";
+        // gridRef.current.style.left = "-100vw";
+        gridRef.current.style.left = `-${prevHScrollStop * 100}vw`;
 
         return prevHScrollStop + 1;
       });
@@ -62,7 +64,8 @@ const moveGridHorizontally = (gridRef, hScrollStop, setHScrollStop, e) => {
         //   console.log("Right to RIGHT SLIDE");
         // });
 
-        gridRef.current.style.left = "-200vw";
+        // gridRef.current.style.left = "-200vw";
+        gridRef.current.style.left = `-${prevHScrollStop * 100}vw`;
         return prevHScrollStop + 1;
       });
     },
