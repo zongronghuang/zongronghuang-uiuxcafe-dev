@@ -1,31 +1,32 @@
+import { scrollTo } from "scroll-js";
+
 const moveGridVertically = (vScrollStop, setVScrollStop, e) => {
   const { deltaY } = e;
 
   const scrollDownOptions = {
     1: () => {
       setVScrollStop((prevVScrollStop) => {
-        // console.log("DOWN stop 1", "stop", prevVScrollStop);
-        window.scrollTo({
-          top: 1 * window.innerHeight,
-          behavior: "smooth",
+        scrollTo(document.body, {
+          top: vScrollStop * window.innerHeight,
+        }).then(function () {
+          console.log("Down to CENTER SLIDE");
         });
         return prevVScrollStop + 1;
       });
     },
     2: () => {
       setVScrollStop((prevVScrollStop) => {
-        // console.log("DOWN stop 2", "stop", prevVScrollStop);
-        window.scrollTo({
-          top: 2 * window.innerHeight,
-          behavior: "smooth",
+        scrollTo(document.body, {
+          top: vScrollStop * window.innerHeight,
+        }).then(function () {
+          console.log("Down to BOTTOM SLIDE");
         });
         return prevVScrollStop + 1;
       });
     },
     3: () => {
       setVScrollStop((prevVScrollStop) => {
-        // console.log("DOWN stop 3", "stop", prevVScrollStop);
-        return prevVScrollStop;
+        return prevVScrollStop + 1;
       });
     },
   };
@@ -33,41 +34,36 @@ const moveGridVertically = (vScrollStop, setVScrollStop, e) => {
   const scrollUpOptions = {
     1: () => {
       setVScrollStop((prevVScrollStop) => {
-        // console.log("UP stop 1", "stop", prevVScrollStop);
-        window.scrollTo({
-          top: 0 * window.innerHeight,
-          behavior: "smooth",
-        });
         return prevVScrollStop;
       });
     },
     2: () => {
       setVScrollStop((prevVScrollStop) => {
-        // console.log("UP stop 2", "stop", prevVScrollStop);
-        window.scrollTo({
-          top: 1 * window.innerHeight,
-          behavior: "smooth",
+        scrollTo(document.body, {
+          top: (vScrollStop - 2) * window.innerHeight,
+        }).then(function () {
+          console.log("Up to TOP SLIDE");
         });
         return prevVScrollStop - 1;
       });
     },
     3: () => {
       setVScrollStop((prevVScrollStop) => {
-        // console.log("UP stop 3", "stop", prevVScrollStop);
-        window.scrollTo({
-          top: 2 * window.innerHeight,
-          behavior: "smooth",
+        scrollTo(document.body, {
+          top: (vScrollStop - 2) * window.innerHeight,
+        }).then(function () {
+          console.log("Up to CENTER SLIDE");
         });
         return prevVScrollStop - 1;
       });
     },
   };
 
-  if (deltaY > 100) {
+  if (deltaY > 30) {
     scrollDownOptions[vScrollStop]();
   }
 
-  if (deltaY < -80) {
+  if (deltaY < -30) {
     scrollUpOptions[vScrollStop]();
   }
 };

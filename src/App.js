@@ -30,7 +30,12 @@ function AppJSX({ className }) {
   }, []);
 
   useEffect(() => {
-    showSideArrows({ hScrollStop, vScrollStop, leftArrowRef, rightArrowRef });
+    showSideArrows({
+      hScrollStop,
+      vScrollStop,
+      leftArrowRef,
+      rightArrowRef,
+    });
   }, [hScrollStop, vScrollStop]);
 
   return (
@@ -42,7 +47,12 @@ function AppJSX({ className }) {
         <Slide xCoordinate="2" yCoordinate="1" bgColor="bg-blue">
           Go down
         </Slide>
-        <Slide xCoordinate="2" yCoordinate="2" bgColor="bg-green">
+        <Slide
+          xCoordinate="2"
+          yCoordinate="2"
+          bgColor="bg-green"
+          center="center"
+        >
           <CardA />
         </Slide>
         <Slide xCoordinate="2" yCoordinate="3" bgColor="bg-yellow">
