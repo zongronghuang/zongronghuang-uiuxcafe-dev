@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
+import { ArrowLeft, ArrowRight } from "phosphor-react";
 import "./App.css";
 import CardA from "./components/Cards/CardA";
 import CardB from "./components/Cards/CardB";
@@ -18,6 +19,7 @@ function AppJSX({ className }) {
   const gridSizeRef = useRef({ cols: 3, rows: 3 });
   // 標記使用者會看到的第一張投影片的座標
   const landingSlideRef = useRef({ x: 2, y: 1 });
+  const intersectionSlideRef = useRef({ x: 2, y: 2 });
 
   // 紀錄橫向 scroll 位置
   const [hScrollStop, setHScrollStop] = useState(landingSlideRef.current.x);
@@ -41,18 +43,18 @@ function AppJSX({ className }) {
   return (
     <div
       className={`${className} App`}
-      onWheel={(e) => moveGridVertically(vScrollStop, setVScrollStop, e)}
+      onWheel={(e) => {
+        if (hScrollStop !== intersectionSlideRef.current.x) {
+          return;
+        }
+        moveGridVertically(vScrollStop, setVScrollStop, e);
+      }}
     >
       <GridView ref={gridRef}>
         <Slide xCoordinate="2" yCoordinate="1" bgColor="bg-blue">
           Go down
         </Slide>
-        <Slide
-          xCoordinate="2"
-          yCoordinate="2"
-          bgColor="bg-green"
-          center="center"
-        >
+        <Slide xCoordinate="2" yCoordinate="2" bgColor="bg-green">
           <CardA />
         </Slide>
         <Slide xCoordinate="2" yCoordinate="3" bgColor="bg-yellow">
@@ -67,10 +69,38 @@ function AppJSX({ className }) {
       </GridView>
 
       <aside ref={leftArrowRef} className="arrow left-arrow">
-        <button>Left</button>
+        <button
+          onClick={(e) => {
+            if (vScrollStop !== intersectionSlideRef.current.y) {
+              return;
+            }
+            moveGridHorizontally(
+              gridRef,
+              hScrollStop,
+              setHScrollStop,
+              e
+            ).toLeft();
+          }}
+        >
+          <ArrowLeft size={32} />
+        </button>
       </aside>
       <aside ref={rightArrowRef} className="arrow right-arrow">
-        <button>Left</button>
+        <button
+          onClick={(e) => {
+            if (vScrollStop !== intersectionSlideRef.current.y) {
+              return;
+            }
+            moveGridHorizontally(
+              gridRef,
+              hScrollStop,
+              setHScrollStop,
+              e
+            ).toRight();
+          }}
+        >
+          <ArrowRight size={32} />
+        </button>
       </aside>
     </div>
   );
@@ -84,7 +114,7 @@ const App = styled(AppJSX)`
     align-items: center;
     width: 5vw;
     height: 100vh;
-    background-color: rgba(255, 255, 255, 0.3);
+    /* background-color: rgba(255, 255, 255, 0.3); */
     visibility: hidden;
 
     &.left-arrow {
@@ -100,6 +130,12 @@ const App = styled(AppJSX)`
     & button {
       width: 100%;
       height: 20%;
+      border: none;
+      background-color: transparent;
+    }
+
+    & button:hover {
+      box-shadow: 0 0 5px black;
     }
   }
 `;
